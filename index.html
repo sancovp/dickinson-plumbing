@@ -4,419 +4,340 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Dickinson Plumbing | Acworth GA</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
-  --navy:#0c1829;--navy-light:#132238;--navy-mid:#1a3050;
-  --white:#fafbfc;--off-white:#f0f2f5;--gray:#8899aa;--gray-light:#c5cfd8;
-  --accent:#c2823c;--accent-hover:#a86b30;--accent-glow:rgba(194,130,60,.16);
-  --accent-light:#d99756;--accent-deep:#8d5524;
-  --font:Inter,-apple-system,system-ui,sans-serif;
-  --max:1200px;--radius:12px;
+  --bg:#0a0f1a;--bg-light:#111827;--bg-mid:#1a2332;
+  --white:#f8f9fa;--cream:#e8e0d4;--gray:#7a8899;--gray-light:#b0bec5;
+  --accent:#c2823c;--accent-hover:#d4944e;--accent-glow:rgba(194,130,60,.12);
+  --accent-deep:#8d5524;
+  --font-display:'Anton',sans-serif;
+  --font-body:'Inter',sans-serif;
+  --max:1200px;
 }
 html{scroll-behavior:smooth}
-body{font-family:var(--font);color:var(--navy);background:var(--white);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body{font-family:var(--font-body);color:var(--cream);background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+
+/* === LIQUID GLASS === */
+.liquid-glass{background:rgba(255,255,255,.02);background-blend-mode:luminosity;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);border:none;box-shadow:inset 0 1px 1px rgba(255,255,255,.08);position:relative;overflow:hidden}
+.liquid-glass::before{content:'';position:absolute;inset:0;border-radius:inherit;padding:1.2px;background:linear-gradient(180deg,rgba(255,255,255,.35) 0%,rgba(255,255,255,.1) 20%,rgba(255,255,255,0) 40%,rgba(255,255,255,0) 60%,rgba(255,255,255,.1) 80%,rgba(255,255,255,.35) 100%);-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
+
+/* === GRAIN OVERLAY === */
+.grain{position:fixed;inset:0;z-index:9999;pointer-events:none;opacity:.35}
+.grain svg{width:100%;height:100%;opacity:.1}
 
 /* === SCROLL ANIMATIONS === */
-.reveal{opacity:0;transform:translateY(40px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1)}
+.reveal{opacity:0;transform:translateY(50px);transition:opacity 1s cubic-bezier(.16,1,.3,1),transform 1s cubic-bezier(.16,1,.3,1)}
 .reveal.visible{opacity:1;transform:translateY(0)}
-.reveal-left{opacity:0;transform:translateX(-40px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1)}
-.reveal-left.visible{opacity:1;transform:translateX(0)}
-.reveal-right{opacity:0;transform:translateX(40px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1)}
-.reveal-right.visible{opacity:1;transform:translateX(0)}
-.reveal-scale{opacity:0;transform:scale(.92);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1)}
+.reveal-scale{opacity:0;transform:scale(.9);transition:opacity 1s cubic-bezier(.16,1,.3,1),transform 1s cubic-bezier(.16,1,.3,1)}
 .reveal-scale.visible{opacity:1;transform:scale(1)}
-.stagger-1{transition-delay:.1s}.stagger-2{transition-delay:.2s}.stagger-3{transition-delay:.3s}
-.stagger-4{transition-delay:.4s}.stagger-5{transition-delay:.5s}.stagger-6{transition-delay:.6s}
+.s1{transition-delay:.1s}.s2{transition-delay:.2s}.s3{transition-delay:.25s}
+.s4{transition-delay:.35s}.s5{transition-delay:.45s}.s6{transition-delay:.55s}
 
 /* === NAV === */
-nav{position:fixed;top:0;width:100%;z-index:100;background:rgba(12,24,41,.92);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,.06);transition:all .3s}
-nav.scrolled{background:rgba(12,24,41,.98);box-shadow:0 4px 30px rgba(0,0,0,.2)}
-.nav-inner{max-width:var(--max);margin:0 auto;padding:16px 24px;display:flex;align-items:center;justify-content:space-between}
-.nav-logo{font-weight:900;font-size:20px;color:var(--white);letter-spacing:-.5px}
-.nav-logo span{color:var(--accent)}
-.nav-links{display:flex;gap:32px;align-items:center}
-.nav-links a{color:var(--gray-light);text-decoration:none;font-size:14px;font-weight:500;transition:color .2s}
+nav{position:fixed;top:0;width:100%;z-index:100;padding:20px 0;transition:all .4s}
+nav.scrolled .nav-pill{background:rgba(10,15,26,.9);box-shadow:0 8px 32px rgba(0,0,0,.3)}
+.nav-inner{max-width:var(--max);margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between}
+.nav-pill{display:flex;align-items:center;gap:32px;padding:14px 32px;border-radius:50px;transition:all .4s}
+.nav-logo{font-family:var(--font-display);font-size:18px;color:var(--white);text-transform:uppercase;letter-spacing:.02em}
+.nav-links{display:flex;gap:28px;align-items:center}
+.nav-links a{color:var(--gray-light);text-decoration:none;font-size:13px;font-weight:500;transition:color .3s;text-transform:uppercase;letter-spacing:.05em}
 .nav-links a:hover{color:var(--accent)}
-.nav-cta{background:var(--accent);color:var(--white);padding:10px 24px;border-radius:8px;font-weight:700;font-size:14px;text-decoration:none;transition:all .3s}
-.nav-cta:hover{background:var(--accent-hover);transform:translateY(-1px);box-shadow:0 4px 20px var(--accent-glow)}
+.nav-cta{background:var(--accent);color:var(--bg);padding:10px 24px;border-radius:50px;font-weight:700;font-size:13px;text-decoration:none;transition:all .3s;text-transform:uppercase;letter-spacing:.03em}
+.nav-cta:hover{background:var(--accent-hover);transform:translateY(-1px);box-shadow:0 6px 24px rgba(194,130,60,.3)}
 
 /* === HERO === */
-.hero{min-height:100vh;background:var(--navy);display:flex;align-items:center;padding:120px 24px 80px;position:relative;overflow:hidden}
-.hero-bg{position:absolute;inset:0;z-index:0}
-.hero-bg img{width:100%;height:100%;object-fit:cover;opacity:.18;filter:blur(1px)}
-.hero-gradient{position:absolute;inset:0;background:linear-gradient(135deg,rgba(12,24,41,.95) 0%,rgba(19,34,56,.85) 40%,rgba(26,48,80,.75) 100%);z-index:1}
-.hero-glow{position:absolute;top:-30%;right:-10%;width:900px;height:900px;border-radius:50%;background:radial-gradient(circle,rgba(194,130,60,.15),transparent 60%);z-index:2;animation:float 8s ease-in-out infinite}
-.hero-glow-2{position:absolute;bottom:-40%;left:-15%;width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,rgba(194,130,60,.08),transparent 60%);z-index:2;animation:float 10s ease-in-out infinite reverse}
-@keyframes float{0%,100%{transform:translate(0,0)}50%{transform:translate(30px,-30px)}}
-.hero-inner{max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;width:100%;position:relative;z-index:3}
-.hero-text h1{font-size:clamp(38px,5.5vw,62px);font-weight:900;color:var(--white);line-height:1.05;letter-spacing:-2px;margin-bottom:24px}
-.hero-text h1 span{color:var(--accent);display:inline}
-.hero-text .hero-sub{font-size:20px;color:var(--gray-light);margin-bottom:40px;max-width:480px;line-height:1.7;font-weight:400}
-.hero-buttons{display:flex;gap:16px;flex-wrap:wrap}
-.btn-primary{background:var(--accent);color:var(--white);padding:18px 36px;border-radius:10px;font-weight:700;font-size:16px;text-decoration:none;display:inline-flex;align-items:center;gap:10px;transition:all .3s;border:none;cursor:pointer;position:relative;overflow:hidden}
-.btn-primary::after{content:"";position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.15),transparent);opacity:0;transition:opacity .3s}
-.btn-primary:hover{transform:translateY(-3px);box-shadow:0 12px 40px rgba(194,130,60,.35)}.btn-primary:hover::after{opacity:1}
-.btn-secondary{background:rgba(255,255,255,.06);color:var(--white);padding:18px 36px;border:1px solid rgba(255,255,255,.12);border-radius:10px;font-weight:600;font-size:16px;text-decoration:none;transition:all .3s;backdrop-filter:blur(8px)}
-.btn-secondary:hover{border-color:var(--accent);color:var(--accent);background:rgba(194,130,60,.06)}
-.hero-image-wrap{border-radius:20px;overflow:hidden;box-shadow:0 40px 80px rgba(0,0,0,.4);border:1px solid rgba(255,255,255,.06);position:relative}
-.hero-image-wrap img{width:100%;height:auto;display:block;transition:transform 6s ease}
-.hero-image-wrap:hover img{transform:scale(1.03)}
-.hero-badge{position:absolute;bottom:20px;left:20px;background:rgba(12,24,41,.85);backdrop-filter:blur(12px);border:1px solid rgba(194,130,60,.3);border-radius:12px;padding:12px 20px;display:flex;align-items:center;gap:12px}
-.hero-badge .hb-stars{color:var(--accent);font-size:14px;letter-spacing:2px}
-.hero-badge .hb-text{color:var(--white);font-size:13px;font-weight:600}
+.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;position:relative;overflow:hidden;padding:120px 24px 80px}
+.hero-orb{position:absolute;border-radius:50%;pointer-events:none}
+.hero-orb-1{top:-20%;right:-10%;width:1000px;height:1000px;background:radial-gradient(circle,rgba(194,130,60,.12),transparent 55%);animation:drift 12s ease-in-out infinite}
+.hero-orb-2{bottom:-30%;left:-15%;width:800px;height:800px;background:radial-gradient(circle,rgba(194,130,60,.06),transparent 55%);animation:drift 16s ease-in-out infinite reverse}
+.hero-orb-3{top:30%;left:50%;width:600px;height:600px;background:radial-gradient(circle,rgba(100,140,200,.04),transparent 55%);animation:drift 14s ease-in-out infinite 2s}
+@keyframes drift{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(40px,-30px) scale(1.05)}66%{transform:translate(-20px,40px) scale(.97)}}
+.hero-content{position:relative;z-index:3;max-width:900px}
+.hero-label{font-size:12px;font-weight:600;letter-spacing:.3em;text-transform:uppercase;color:var(--accent);margin-bottom:32px;opacity:.9}
+.hero h1{font-family:var(--font-display);font-size:clamp(48px,10vw,120px);color:var(--white);line-height:.95;text-transform:uppercase;letter-spacing:-.02em;margin-bottom:32px}
+.hero h1 span{color:var(--accent)}
+.hero-sub{font-size:clamp(15px,2vw,19px);color:var(--gray-light);max-width:520px;margin:0 auto 48px;line-height:1.7;font-weight:400}
+.hero-buttons{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+.btn{padding:18px 40px;border-radius:50px;font-weight:600;font-size:15px;text-decoration:none;transition:all .3s;display:inline-flex;align-items:center;gap:10px;cursor:pointer;border:none}
+.btn-fill{background:var(--accent);color:var(--bg)}.btn-fill:hover{background:var(--accent-hover);transform:translateY(-3px);box-shadow:0 12px 40px rgba(194,130,60,.3)}
+.btn-glass{color:var(--white)}.btn-glass:hover{background:rgba(255,255,255,.08)}
+.hero-rating{margin-top:40px;display:flex;align-items:center;justify-content:center;gap:12px}
+.hero-stars{color:var(--accent);font-size:16px;letter-spacing:3px}
+.hero-rating-text{font-size:13px;color:var(--gray-light);font-weight:500}
 
 /* === TRUST === */
-.trust{background:var(--navy);padding:0 24px 64px;position:relative;z-index:3}
-.trust-inner{max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
-.trust-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);border-radius:14px;padding:28px 24px;text-align:center;transition:all .4s;backdrop-filter:blur(4px)}
-.trust-card:hover{border-color:rgba(194,130,60,.3);transform:translateY(-4px);box-shadow:0 12px 40px rgba(0,0,0,.2)}
-.trust-num{font-size:36px;font-weight:900;color:var(--accent);letter-spacing:-1px;line-height:1}
-.trust-label{font-size:13px;font-weight:600;color:var(--gray-light);margin-top:8px;text-transform:uppercase;letter-spacing:1.5px}
+.trust{padding:0 24px 120px;position:relative;z-index:2}
+.trust-grid{max-width:var(--max);margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.trust-card{border-radius:20px;padding:32px 24px;text-align:center;transition:all .4s}
+.trust-card:hover{transform:translateY(-4px);box-shadow:0 16px 48px rgba(0,0,0,.2)}
+.trust-num{font-family:var(--font-display);font-size:42px;color:var(--white);text-transform:uppercase;letter-spacing:-.01em}
+.trust-label{font-size:11px;font-weight:600;color:var(--gray);margin-top:8px;text-transform:uppercase;letter-spacing:.15em}
 
-/* === BADGES === */
-.badges{padding:64px 24px;background:var(--white);border-bottom:1px solid rgba(12,24,41,.06)}
-.badges-inner{max-width:var(--max);margin:0 auto;text-align:center}
-.badges-label{font-size:12px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--gray);margin-bottom:24px}
-.badges-row{display:flex;justify-content:center;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:24px}
-.badge{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:16px 24px;border:1px solid rgba(12,24,41,.08);border-radius:12px;background:var(--white);min-width:140px;transition:all .3s}
-.badge:hover{border-color:var(--accent);transform:translateY(-3px);box-shadow:0 12px 32px rgba(12,24,41,.08)}
-.badge strong{font-size:15px;font-weight:800;color:var(--navy)}
-.badge span{font-size:11px;font-weight:700;color:var(--accent);letter-spacing:1.5px;text-transform:uppercase;margin-top:6px}
-.license-line{font-size:14px;color:var(--navy);font-weight:600;padding-top:16px;border-top:1px solid rgba(12,24,41,.06);max-width:560px;margin:0 auto}
-.license-line strong{color:var(--accent-deep);font-weight:800}
+/* === SECTION SHARED === */
+.section{min-height:100vh;display:flex;align-items:center;padding:120px 24px;position:relative}
+.section-inner{max-width:var(--max);margin:0 auto;width:100%}
+.section-label{font-size:11px;font-weight:700;letter-spacing:.3em;text-transform:uppercase;color:var(--accent);margin-bottom:20px}
+.section-title{font-family:var(--font-display);font-size:clamp(32px,6vw,72px);color:var(--white);text-transform:uppercase;letter-spacing:-.02em;line-height:.95;margin-bottom:24px}
+.section-desc{font-size:16px;color:var(--gray-light);max-width:480px;line-height:1.8;margin-bottom:56px}
 
 /* === SERVICES === */
-.services{padding:100px 24px;background:var(--off-white)}
-.section-inner{max-width:var(--max);margin:0 auto}
-.section-label{font-size:13px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--accent);margin-bottom:16px}
-.section-title{font-size:clamp(28px,4vw,44px);font-weight:900;color:var(--navy);letter-spacing:-.5px;margin-bottom:16px;line-height:1.15}
-.section-desc{font-size:17px;color:var(--gray);max-width:560px;margin-bottom:56px;line-height:1.7}
-.services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px}
-.service-card{padding:36px;border-radius:16px;background:var(--white);border:1px solid rgba(12,24,41,.04);transition:all .4s;position:relative;overflow:hidden}
-.service-card::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--accent),var(--accent-light));transform:scaleX(0);transform-origin:left;transition:transform .4s}
-.service-card:hover{border-color:rgba(194,130,60,.2);transform:translateY(-6px);box-shadow:0 20px 60px rgba(12,24,41,.08)}
-.service-card:hover::before{transform:scaleX(1)}
-.service-icon{width:56px;height:56px;border-radius:14px;background:linear-gradient(135deg,rgba(194,130,60,.12),rgba(194,130,60,.04));display:flex;align-items:center;justify-content:center;margin-bottom:20px;color:var(--accent);border:1px solid rgba(194,130,60,.15)}
-.service-icon svg{width:26px;height:26px}
-.service-card h3{font-size:18px;font-weight:800;margin-bottom:10px;color:var(--navy)}
-.service-card p{font-size:14px;color:var(--gray);line-height:1.7}
+.services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.svc{border-radius:20px;padding:40px 32px;transition:all .4s;position:relative;overflow:hidden}
+.svc::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--accent),var(--accent-deep));transform:scaleX(0);transform-origin:left;transition:transform .5s}
+.svc:hover{transform:translateY(-6px);box-shadow:0 24px 64px rgba(0,0,0,.15)}.svc:hover::after{transform:scaleX(1)}
+.svc h3{font-family:var(--font-display);font-size:20px;color:var(--white);text-transform:uppercase;letter-spacing:.01em;margin-bottom:12px}
+.svc p{font-size:14px;color:var(--gray);line-height:1.7}
 
 /* === ABOUT === */
-.about{padding:100px 24px;background:var(--navy);color:var(--white);position:relative;overflow:hidden}
-.about::before{content:"";position:absolute;top:-200px;right:-200px;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(194,130,60,.08),transparent);pointer-events:none}
-.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
-.about-stats{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:40px}
-.stat{padding:28px;border-radius:14px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);transition:all .3s}
-.stat:hover{border-color:rgba(194,130,60,.2);background:rgba(255,255,255,.06)}
-.stat-num{font-size:36px;font-weight:900;color:var(--accent);letter-spacing:-1px}
-.stat-label{font-size:13px;color:var(--gray-light);margin-top:4px;font-weight:500}
-.about-img{border-radius:20px;overflow:hidden;box-shadow:0 40px 80px rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.06)}
-.about-img img{width:100%;height:auto;display:block;transition:transform 4s ease}
-.about-img:hover img{transform:scale(1.04)}
-
-/* === SERVICE AREA === */
-.area{padding:100px 24px;background:var(--off-white)}
-.area-header{text-align:center;margin-bottom:48px}
-.area-header .section-desc{margin-left:auto;margin-right:auto}
-.area-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;max-width:900px;margin:0 auto}
-.area-pin{display:flex;align-items:center;gap:10px;padding:16px 20px;background:var(--white);border-radius:10px;border:1px solid rgba(12,24,41,.06);font-weight:600;font-size:15px;color:var(--navy);transition:all .3s}
-.area-pin:hover{border-color:var(--accent);transform:translateX(4px);box-shadow:0 8px 24px rgba(12,24,41,.06)}
-.area-pin svg{width:18px;height:18px;color:var(--accent);flex-shrink:0}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.about-stats{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:48px}
+.stat{border-radius:16px;padding:28px;transition:all .3s}
+.stat:hover{background:rgba(255,255,255,.04)}
+.stat-num{font-family:var(--font-display);font-size:40px;color:var(--accent);text-transform:uppercase}
+.stat-label{font-size:12px;color:var(--gray);margin-top:4px;text-transform:uppercase;letter-spacing:.1em}
+.about-img{border-radius:24px;overflow:hidden;border:1px solid rgba(255,255,255,.04)}
+.about-img img{width:100%;height:auto;display:block;transition:transform 6s ease}
+.about-img:hover img{transform:scale(1.05)}
 
 /* === TESTIMONIALS === */
-.testimonials{padding:100px 24px;background:var(--white)}
-.testimonials-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:24px}
-.testimonial{padding:36px;border-radius:16px;background:var(--off-white);border:1px solid rgba(12,24,41,.04);position:relative;transition:all .4s}
-.testimonial:hover{transform:translateY(-4px);box-shadow:0 16px 48px rgba(12,24,41,.08);border-color:rgba(194,130,60,.15)}
-.testimonial .stars{color:var(--accent);font-size:18px;letter-spacing:3px;margin-bottom:12px;font-weight:700}
-.testimonial p{font-size:16px;color:var(--navy);line-height:1.8;margin-bottom:20px;font-style:italic}
-.t-author{display:flex;align-items:center;gap:14px;padding-top:16px;border-top:1px solid rgba(12,24,41,.06)}
-.t-avatar{width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent-deep));color:var(--white);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:14px;flex-shrink:0}
-.testimonial-author{font-weight:700;font-size:15px;color:var(--navy)}
-.testimonial-role{font-size:13px;color:var(--gray)}
-.verified{display:inline-flex;align-items:center;gap:4px;color:var(--accent);font-weight:700}
-.verified svg{width:12px;height:12px}
-.platform-badge{display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase}
-.badge-angi{background:rgba(46,139,87,.1);color:#2e8b57}
-.badge-ha{background:rgba(255,120,0,.1);color:#e66a00}
-.badge-google{background:rgba(66,133,244,.1);color:#4285f4}
+.test-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.test{border-radius:20px;padding:40px 32px;transition:all .4s}
+.test:hover{transform:translateY(-4px);box-shadow:0 16px 48px rgba(0,0,0,.15)}
+.test .stars{color:var(--accent);font-size:16px;letter-spacing:4px;margin-bottom:16px}
+.test p{font-size:15px;color:var(--cream);line-height:1.8;margin-bottom:24px;font-style:italic;opacity:.9}
+.t-footer{display:flex;align-items:center;gap:14px;padding-top:20px;border-top:1px solid rgba(255,255,255,.06)}
+.t-av{width:44px;height:44px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:13px;color:var(--white);flex-shrink:0}
+.t-name{font-weight:700;font-size:14px;color:var(--white)}
+.t-src{font-size:12px;color:var(--gray)}
+.pill{display:inline-flex;padding:3px 10px;border-radius:20px;font-size:10px;font-weight:700;letter-spacing:.5px;text-transform:uppercase}
+.pill-angi{background:rgba(46,139,87,.12);color:#4eca7b}
+.pill-ha{background:rgba(255,140,0,.12);color:#ffaa33}
+.pill-google{background:rgba(100,160,255,.12);color:#7ab4ff}
+
+/* === BADGES === */
+.badges-row{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-bottom:24px}
+.bdg{border-radius:16px;padding:18px 28px;text-align:center;min-width:140px;transition:all .3s}
+.bdg:hover{transform:translateY(-2px)}
+.bdg strong{display:block;font-size:14px;font-weight:800;color:var(--white)}
+.bdg span{display:block;font-size:10px;font-weight:700;color:var(--accent);letter-spacing:.15em;text-transform:uppercase;margin-top:6px}
+.license{font-size:13px;color:var(--gray);text-align:center;margin-top:16px}
 
 /* === CTA === */
-.cta{padding:120px 24px;background:var(--navy);text-align:center;position:relative;overflow:hidden}
-.cta::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(194,130,60,.1),transparent 70%);pointer-events:none}
-.cta h2{font-size:clamp(32px,5vw,52px);font-weight:900;color:var(--white);margin-bottom:16px;letter-spacing:-1px;position:relative;z-index:1}
-.cta p{font-size:18px;color:var(--gray-light);margin-bottom:40px;max-width:500px;margin-left:auto;margin-right:auto;position:relative;z-index:1}
-.cta .btn-primary{font-size:20px;padding:22px 48px;position:relative;z-index:1}
+.cta-section{min-height:60vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:120px 24px;position:relative;overflow:hidden}
+.cta-section::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(194,130,60,.08),transparent 65%);pointer-events:none}
 
 /* === FOOTER === */
-footer{padding:48px 24px;background:var(--navy);border-top:1px solid rgba(255,255,255,.06)}
+footer{padding:48px 24px;border-top:1px solid rgba(255,255,255,.04)}
 .footer-inner{max-width:var(--max);margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:24px}
-.footer-brand{font-weight:800;font-size:16px;color:var(--white)}
-.footer-brand span{color:var(--accent)}
+.footer-brand{font-family:var(--font-display);font-size:16px;color:var(--white);text-transform:uppercase}
 .footer-links{display:flex;gap:24px}
-.footer-links a{color:var(--gray);text-decoration:none;font-size:14px;transition:color .2s}
+.footer-links a{color:var(--gray);text-decoration:none;font-size:13px;transition:color .2s}
 .footer-links a:hover{color:var(--accent)}
-.footer-copy{color:var(--gray);font-size:13px;width:100%;text-align:center;margin-top:24px;padding-top:24px;border-top:1px solid rgba(255,255,255,.06)}
+.footer-copy{color:var(--gray);font-size:12px;width:100%;text-align:center;margin-top:24px;padding-top:24px;border-top:1px solid rgba(255,255,255,.04)}
+
+/* === AREA === */
+.area-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;max-width:800px}
+.area-pin{padding:14px 18px;border-radius:12px;font-weight:600;font-size:14px;color:var(--cream);transition:all .3s;display:flex;align-items:center;gap:8px}
+.area-pin:hover{transform:translateX(4px);background:rgba(255,255,255,.04)}
+.area-pin::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--accent);flex-shrink:0}
 
 /* === RESPONSIVE === */
+@media(max-width:1024px){.services-grid,.test-grid{grid-template-columns:1fr 1fr}}
 @media(max-width:768px){
-  .hero-inner,.about-grid{grid-template-columns:1fr}
-  .hero-image-wrap{order:-1}
+  .hero h1{font-size:clamp(40px,12vw,72px)}
+  .about-grid{grid-template-columns:1fr}
+  .services-grid,.test-grid{grid-template-columns:1fr}
+  .trust-grid{grid-template-columns:1fr 1fr}
+  .area-grid{grid-template-columns:1fr 1fr}
   .nav-links{display:none}
-  .trust-inner{grid-template-columns:1fr 1fr}
-  .about-stats{grid-template-columns:1fr}
-  .badges-row{gap:10px}
-  .badge{min-width:120px}
-  .hero-text h1{letter-spacing:-1px}
+  .section{min-height:auto;padding:80px 24px}
 }
 @media(max-width:480px){
-  .trust-inner{grid-template-columns:1fr}
-  .hero-buttons{flex-direction:column}
-  .btn-primary,.btn-secondary{width:100%;justify-content:center}
+  .trust-grid{grid-template-columns:1fr}
+  .hero-buttons{flex-direction:column;align-items:center}
+  .btn{width:100%;justify-content:center}
 }
 </style>
 </head>
 <body>
 
+<div class="grain"><svg xmlns="http://www.w3.org/2000/svg"><filter id="g"><feTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="4" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(#g)"/></svg></div>
+
 <nav id="navbar">
 <div class="nav-inner">
-  <div class="nav-logo">Dickinson<span>.</span></div>
-  <div class="nav-links">
-    <a href="#services">Services</a>
-    <a href="#about">About</a>
-    <a href="#testimonials">Reviews</a>
-    <a href="#contact" class="nav-cta">Get Free Estimate</a>
+  <div class="nav-pill liquid-glass">
+    <div class="nav-logo">Dickinson</div>
+    <div class="nav-links">
+      <a href="#services">Services</a>
+      <a href="#about">About</a>
+      <a href="#reviews">Reviews</a>
+      <a href="#contact" class="nav-cta">Free Estimate</a>
+    </div>
   </div>
 </div>
 </nav>
 
 <section class="hero">
-<div class="hero-bg"><img src="hero.png" alt=""></div>
-<div class="hero-gradient"></div>
-<div class="hero-glow"></div>
-<div class="hero-glow-2"></div>
-<div class="hero-inner">
-  <div class="hero-text">
-    <h1 class="reveal">2AM Pipe Burst?<br><span>We Answer.</span></h1>
-    <p class="hero-sub reveal stagger-1">Family-owned since 2010. Master Plumber-licensed. Serving Acworth &amp; Cobb County with a $50 service call — waived if we do the work.</p>
-    <div class="hero-buttons reveal stagger-2">
-      <a href="tel:(770) 427-6389" class="btn-primary"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="width:20px;height:20px"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>(770) 427-6389</a>
-      <a href="#services" class="btn-secondary">Our Services</a>
+  <div class="hero-orb hero-orb-1"></div>
+  <div class="hero-orb hero-orb-2"></div>
+  <div class="hero-orb hero-orb-3"></div>
+  <div class="hero-content">
+    <div class="hero-label reveal">Master Plumber Licensed &middot; Acworth, GA</div>
+    <h1 class="reveal s1">2AM Pipe<br>Burst?<br><span>We Answer.</span></h1>
+    <p class="hero-sub reveal s2">Family-owned since 2010. $50 service call — waived when we do the work. Licensed, bonded, insured across every job.</p>
+    <div class="hero-buttons reveal s3">
+      <a href="tel:(770)427-6389" class="btn btn-fill">Call (770) 427-6389</a>
+      <a href="#services" class="btn btn-glass liquid-glass">Our Services</a>
+    </div>
+    <div class="hero-rating reveal s4">
+      <div class="hero-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+      <div class="hero-rating-text">5.0 on Google &middot; Angi &middot; HomeAdvisor</div>
     </div>
   </div>
-  <div class="hero-image-wrap reveal-right stagger-2">
-    <img src="https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=800&q=85" alt="Dickinson Plumbing professional service">
-    <div class="hero-badge">
-      <div class="hb-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-      <div class="hb-text">5.0 on Google &middot; Angi &middot; HomeAdvisor</div>
-    </div>
-  </div>
-</div>
 </section>
 
 <section class="trust">
-<div class="trust-inner">
-  <div class="trust-card reveal stagger-1">
-    <div class="trust-num" data-count="15">0</div>
-    <div class="trust-label">Years Experience</div>
+  <div class="trust-grid">
+    <div class="trust-card liquid-glass reveal s1"><div class="trust-num">15+</div><div class="trust-label">Years Local</div></div>
+    <div class="trust-card liquid-glass reveal s2"><div class="trust-num">5.0&#9733;</div><div class="trust-label">Rated</div></div>
+    <div class="trust-card liquid-glass reveal s3"><div class="trust-num">$50</div><div class="trust-label">Service Call</div></div>
+    <div class="trust-card liquid-glass reveal s4"><div class="trust-num">24/7</div><div class="trust-label">Emergency</div></div>
   </div>
-  <div class="trust-card reveal stagger-2">
-    <div class="trust-num">5.0 <span style="font-size:18px">&#9733;</span></div>
-    <div class="trust-label">Google Rating</div>
-  </div>
-  <div class="trust-card reveal stagger-3">
-    <div class="trust-num">$50</div>
-    <div class="trust-label">Service Call &middot; Waived</div>
-  </div>
-  <div class="trust-card reveal stagger-4">
-    <div class="trust-num">24/7</div>
-    <div class="trust-label">Emergency Service</div>
-  </div>
-</div>
 </section>
 
-<section class="badges reveal">
-<div class="badges-inner">
-  <div class="badges-label">Trusted &middot; Certified &middot; Insured</div>
-  <div class="badges-row">
-    <div class="badge reveal stagger-1"><strong>Master Plumber</strong><span>MP007570</span></div>
-    <div class="badge reveal stagger-2"><strong>Utility Contractor</strong><span>UC300932</span></div>
-    <div class="badge reveal stagger-3"><strong>Angi</strong><span>5.0 &#9733; Verified</span></div>
-    <div class="badge reveal stagger-4"><strong>HomeAdvisor</strong><span>5.0 &#9733; Rated</span></div>
-    <div class="badge reveal stagger-5"><strong>Family Owned</strong><span>Since 2010</span></div>
-  </div>
-  <div class="license-line">Master Plumber #<strong>MP007570</strong> &middot; MPR #MPR005941 &middot; Utility Contractor #<strong>UC300932</strong> &middot; Bonded &middot; Insured</div>
-</div>
-</section>
-
-<section class="services" id="services">
+<section class="section" id="services">
 <div class="section-inner">
   <div class="section-label reveal">What We Do</div>
-  <div class="section-title reveal">Plumbing That Shows Up<br>When You Need It</div>
-  <div class="section-desc reveal">Emergency repairs to full remodels. Licensed, bonded, and insured across every job.</div>
+  <div class="section-title reveal s1">Plumbing That<br>Shows Up</div>
+  <div class="section-desc reveal s2">Emergency repairs to full remodels. Every job licensed, bonded, and insured.</div>
   <div class="services-grid">
-    <div class="service-card reveal stagger-1">
-      <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg></div>
-      <h3>Water Heaters</h3>
-      <p>Tank and tankless — repair, replacement, and maintenance on every major brand. Same-day service available.</p>
-    </div>
-    <div class="service-card reveal stagger-2">
-      <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
-      <h3>Drain Cleaning &amp; Hydro Jetting</h3>
-      <p>Mechanical snaking for routine clogs, hydro jetting for the stubborn ones. Camera inspection included.</p>
-    </div>
-    <div class="service-card reveal stagger-3">
-      <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
-      <h3>Sewer Line Repair</h3>
-      <p>Full inspection, repair, and replacement. Trenchless options where appropriate — less digging, less damage.</p>
-    </div>
-    <div class="service-card reveal stagger-4">
-      <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div>
-      <h3>Leak Detection</h3>
-      <p>Non-invasive slab leak detection, supply lines, hidden drips. Find the leak before the damage spreads.</p>
-    </div>
-    <div class="service-card reveal stagger-5">
-      <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/></svg></div>
-      <h3>Whole-Home Repipe</h3>
-      <p>Copper, PEX, or polybutylene replacement for older Atlanta homes. Code-compliant and warrantied.</p>
-    </div>
-    <div class="service-card reveal stagger-6">
-      <div class="service-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
-      <h3>Commercial &amp; Restaurant</h3>
-      <p>Backflow testing, grease line maintenance, emergency commercial response. Built for businesses that can't be down.</p>
-    </div>
+    <div class="svc liquid-glass reveal s1"><h3>Water Heaters</h3><p>Tank and tankless — repair, replacement, maintenance on every major brand. Same-day service available.</p></div>
+    <div class="svc liquid-glass reveal s2"><h3>Drain Cleaning</h3><p>Mechanical snaking for routine clogs, hydro jetting for the stubborn ones. Camera inspection included.</p></div>
+    <div class="svc liquid-glass reveal s3"><h3>Sewer Lines</h3><p>Full inspection, repair, and replacement. Trenchless options — less digging, less damage to your yard.</p></div>
+    <div class="svc liquid-glass reveal s4"><h3>Leak Detection</h3><p>Non-invasive slab leak detection and supply line tracing. Find the leak before the damage spreads.</p></div>
+    <div class="svc liquid-glass reveal s5"><h3>Whole-Home Repipe</h3><p>Copper, PEX, or polybutylene replacement for older homes. Code-compliant and warrantied.</p></div>
+    <div class="svc liquid-glass reveal s6"><h3>Commercial</h3><p>Backflow testing, grease line maintenance, emergency commercial response. Built for businesses that can't be down.</p></div>
   </div>
 </div>
 </section>
 
-<section class="about" id="about">
+<section class="section" id="about" style="background:var(--bg-light)">
 <div class="section-inner">
 <div class="about-grid">
-  <div class="reveal-left">
-    <div class="section-label" style="color:var(--accent)">About Us</div>
-    <div class="section-title" style="color:var(--white)">Still Locally Owned.<br>Still Family Run.</div>
-    <p style="color:var(--gray-light);font-size:17px;line-height:1.8;margin-bottom:12px">Dickinson Plumbing has served Acworth and the greater Cobb County area for over 15 years. Family-owned by Doug Dickinson, our work covers everything from a leaking faucet to commercial backflow systems and restaurant grease lines.</p>
-    <p style="color:var(--gray-light);font-size:17px;line-height:1.8">We charge a flat $50 service call — waived entirely if you have us do the work. No surprises, no upsells.</p>
+  <div>
+    <div class="section-label reveal">About</div>
+    <div class="section-title reveal s1">Still Family<br>Run</div>
+    <p style="color:var(--gray-light);font-size:16px;line-height:1.8;margin-bottom:12px" class="reveal s2">Dickinson Plumbing has served Acworth and greater Cobb County for over 15 years. Family-owned by Doug Dickinson — from leaking faucets to commercial backflow systems.</p>
+    <p style="color:var(--gray);font-size:15px;line-height:1.8" class="reveal s3">Flat $50 service call, waived if you have us do the work. No surprises.</p>
     <div class="about-stats">
-      <div class="stat reveal stagger-1"><div class="stat-num" data-count="15">0</div><div class="stat-label">Years in Acworth</div></div>
-      <div class="stat reveal stagger-2"><div class="stat-num">5.0&#9733;</div><div class="stat-label">Angi &middot; HomeAdvisor</div></div>
-      <div class="stat reveal stagger-3"><div class="stat-num">$50</div><div class="stat-label">Service Call &middot; Waived</div></div>
-      <div class="stat reveal stagger-4"><div class="stat-num">3</div><div class="stat-label">GA Licenses Held</div></div>
+      <div class="stat liquid-glass reveal s2"><div class="stat-num">15+</div><div class="stat-label">Years Acworth</div></div>
+      <div class="stat liquid-glass reveal s3"><div class="stat-num">5.0&#9733;</div><div class="stat-label">Angi &middot; HA</div></div>
+      <div class="stat liquid-glass reveal s4"><div class="stat-num">$50</div><div class="stat-label">Waived Call</div></div>
+      <div class="stat liquid-glass reveal s5"><div class="stat-num">3</div><div class="stat-label">GA Licenses</div></div>
     </div>
   </div>
-  <div class="about-img reveal-right">
-    <img src="https://images.unsplash.com/photo-1581092795360-fd1ca04f0952?w=600&q=85" alt="Professional plumber at work">
+  <div class="about-img reveal-scale">
+    <img src="https://images.unsplash.com/photo-1581092795360-fd1ca04f0952?w=600&q=85" alt="Professional plumber">
   </div>
 </div>
 </div>
 </section>
 
-<section class="area reveal">
-<div class="section-inner">
-  <div class="area-header">
-    <div class="section-label">Service Area</div>
-    <div class="section-title">Proudly Serving Cobb County</div>
-    <div class="section-desc" style="margin-left:auto;margin-right:auto">Fast local response across north metro Atlanta. Most emergency calls reached within the hour.</div>
-  </div>
-  <div class="area-grid">
-    <div class="area-pin reveal stagger-1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Acworth</div>
-    <div class="area-pin reveal stagger-2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Kennesaw</div>
-    <div class="area-pin reveal stagger-3"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Marietta</div>
-    <div class="area-pin reveal stagger-4"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Woodstock</div>
-    <div class="area-pin reveal stagger-5"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Powder Springs</div>
-    <div class="area-pin reveal stagger-6"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Dallas</div>
-    <div class="area-pin reveal stagger-1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Cartersville</div>
-    <div class="area-pin reveal stagger-2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Hiram</div>
-  </div>
-</div>
-</section>
-
-<section class="testimonials" id="testimonials">
+<section class="section" id="reviews">
 <div class="section-inner">
   <div class="section-label reveal">Reviews</div>
-  <div class="section-title reveal">What Customers Say</div>
-  <div class="section-desc reveal">Real reviews from real platforms. No edits, no spin.</div>
-  <div class="testimonials-grid">
-    <div class="testimonial reveal stagger-1">
+  <div class="section-title reveal s1">Real Words<br>From Real<br>Customers</div>
+  <div class="section-desc reveal s2">Verified reviews from public platforms. No edits.</div>
+  <div class="test-grid">
+    <div class="test liquid-glass reveal s1">
       <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-      <p>"They have always answered the phones any time needed, and arrive on time and always do a professional job. Very communicative, explained everything they were doing and why."</p>
-      <div class="t-author">
-        <div class="t-avatar" style="background:linear-gradient(135deg,#2e8b57,#1a6b3a)">&#10003;</div>
-        <div>
-          <div class="testimonial-author">Verified Customer</div>
-          <div class="testimonial-role"><span class="platform-badge badge-angi">Angi 5.0 &#9733;</span> <span class="verified"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Verified</span></div>
-        </div>
+      <p>"They have always answered the phones any time needed, and arrive on time. Very communicative — explained everything they were doing and why."</p>
+      <div class="t-footer">
+        <div class="t-av" style="background:linear-gradient(135deg,#2a7d4f,#1a5c38)">&#10003;</div>
+        <div><div class="t-name">Verified Customer</div><div class="t-src"><span class="pill pill-angi">Angi 5.0</span></div></div>
       </div>
     </div>
-    <div class="testimonial reveal stagger-2">
+    <div class="test liquid-glass reveal s2">
       <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-      <p>"Extremely responsive and communicative from making an action plan to fixing the short and longer term issues. Would hire them again without hesitation."</p>
-      <div class="t-author">
-        <div class="t-avatar">BW</div>
-        <div>
-          <div class="testimonial-author">Brittany W.</div>
-          <div class="testimonial-role"><span class="platform-badge badge-ha">HomeAdvisor</span> <span class="verified"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Verified</span></div>
-        </div>
+      <p>"Extremely responsive from making an action plan to fixing the short and longer term issues. Would hire them again without hesitation."</p>
+      <div class="t-footer">
+        <div class="t-av" style="background:linear-gradient(135deg,var(--accent),var(--accent-deep))">BW</div>
+        <div><div class="t-name">Brittany W.</div><div class="t-src"><span class="pill pill-ha">HomeAdvisor</span></div></div>
       </div>
     </div>
-    <div class="testimonial reveal stagger-3">
+    <div class="test liquid-glass reveal s3">
       <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-      <p>"Silas is the best! He is not only a great plumber but also a very nice young man. Showed up on time, fixed it fast, and cleaned up after."</p>
-      <div class="t-author">
-        <div class="t-avatar" style="background:linear-gradient(135deg,#4285f4,#2a5db5)">&#9733;</div>
-        <div>
-          <div class="testimonial-author">Verified Customer</div>
-          <div class="testimonial-role"><span class="platform-badge badge-google">Google</span> <span class="verified"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Verified</span></div>
-        </div>
+      <p>"Silas is the best! Great plumber and a very nice young man. Showed up on time, fixed it fast, cleaned up after."</p>
+      <div class="t-footer">
+        <div class="t-av" style="background:linear-gradient(135deg,#4a80d4,#2a5db5)">&#9733;</div>
+        <div><div class="t-name">Verified Customer</div><div class="t-src"><span class="pill pill-google">Google</span></div></div>
       </div>
     </div>
   </div>
 </div>
 </section>
 
-<section class="cta" id="contact">
-<div class="section-inner reveal-scale">
-  <h2>Ready to Fix It Right?</h2>
-  <p>Call now for a free estimate. No obligation, no pressure — just honest advice from a licensed Master Plumber.</p>
-  <a href="tel:(770) 427-6389" class="btn-primary"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="width:22px;height:22px"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>(770) 427-6389</a>
-  <p style="margin-top:24px;font-size:14px;color:var(--gray)">Acworth, GA 30101 &middot; Serving all of Cobb County</p>
+<section class="section" style="min-height:auto;padding:80px 24px">
+<div class="section-inner" style="text-align:center">
+  <div class="section-label reveal">Credentials</div>
+  <div class="badges-row">
+    <div class="bdg liquid-glass reveal s1"><strong>Master Plumber</strong><span>MP007570</span></div>
+    <div class="bdg liquid-glass reveal s2"><strong>Utility Contractor</strong><span>UC300932</span></div>
+    <div class="bdg liquid-glass reveal s3"><strong>Angi Verified</strong><span>5.0 &#9733;</span></div>
+    <div class="bdg liquid-glass reveal s4"><strong>HomeAdvisor</strong><span>5.0 &#9733;</span></div>
+    <div class="bdg liquid-glass reveal s5"><strong>Family Owned</strong><span>Since 2010</span></div>
+  </div>
+  <div class="license reveal">Master Plumber #MP007570 &middot; MPR #MPR005941 &middot; Utility Contractor #UC300932 &middot; Bonded &middot; Insured</div>
 </div>
+</section>
+
+<section class="section" style="min-height:auto;padding:80px 24px">
+<div class="section-inner">
+  <div class="section-label reveal">Service Area</div>
+  <div class="section-title reveal s1" style="margin-bottom:40px">Cobb County<br>&amp; Beyond</div>
+  <div class="area-grid">
+    <div class="area-pin reveal s1">Acworth</div>
+    <div class="area-pin reveal s2">Kennesaw</div>
+    <div class="area-pin reveal s3">Marietta</div>
+    <div class="area-pin reveal s4">Woodstock</div>
+    <div class="area-pin reveal s5">Powder Springs</div>
+    <div class="area-pin reveal s6">Dallas</div>
+    <div class="area-pin reveal s1">Cartersville</div>
+    <div class="area-pin reveal s2">Hiram</div>
+  </div>
+</div>
+</section>
+
+<section class="cta-section" id="contact">
+  <div class="hero-orb" style="top:-30%;right:-20%;width:800px;height:800px;background:radial-gradient(circle,rgba(194,130,60,.1),transparent 55%);animation:drift 10s ease-in-out infinite"></div>
+  <div style="position:relative;z-index:2" class="reveal-scale">
+    <div class="section-label">Ready?</div>
+    <div class="section-title" style="margin-bottom:24px">Fix It Right.<br>Call Now.</div>
+    <p style="font-size:17px;color:var(--gray-light);margin-bottom:40px;max-width:400px;margin-left:auto;margin-right:auto;line-height:1.7">No obligation. No pressure. Just honest advice from a licensed Master Plumber.</p>
+    <a href="tel:(770)427-6389" class="btn btn-fill" style="font-size:18px;padding:22px 48px">Call (770) 427-6389</a>
+    <p style="margin-top:24px;font-size:13px;color:var(--gray)">Acworth, GA 30101 &middot; Serving all of Cobb County</p>
+  </div>
 </section>
 
 <footer>
 <div class="footer-inner">
-  <div class="footer-brand">Dickinson Plumbing<span>.</span></div>
+  <div class="footer-brand">Dickinson Plumbing</div>
   <div class="footer-links">
     <a href="#services">Services</a>
     <a href="#about">About</a>
-    <a href="#testimonials">Reviews</a>
-    <a href="tel:(770) 427-6389">Call Us</a>
+    <a href="#reviews">Reviews</a>
+    <a href="tel:(770)427-6389">Call</a>
   </div>
-  <div class="footer-copy">&copy; 2026 Dickinson Plumbing. All rights reserved. Master Plumber #MP007570 &middot; Licensed &amp; Insured &middot; Acworth, GA</div>
+  <div class="footer-copy">&copy; 2026 Dickinson Plumbing &middot; Master Plumber #MP007570 &middot; Licensed &amp; Insured &middot; Acworth, GA</div>
 </div>
 </footer>
 
 <script>
-const obs=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target)}})},{threshold:.15,rootMargin:'0px 0px -40px 0px'});
-document.querySelectorAll('.reveal,.reveal-left,.reveal-right,.reveal-scale').forEach(el=>obs.observe(el));
-
-window.addEventListener('scroll',()=>{
-  document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>60);
-});
-
-document.querySelectorAll('[data-count]').forEach(el=>{
-  const target=parseInt(el.dataset.count);
-  const io=new IntersectionObserver(([e])=>{
-    if(e.isIntersecting){
-      let n=0;const step=Math.ceil(target/30);
-      const t=setInterval(()=>{n+=step;if(n>=target){n=target;clearInterval(t)}el.textContent=n+'+'},40);
-      io.unobserve(el);
-    }
-  },{threshold:.5});
-  io.observe(el);
-});
+const obs=new IntersectionObserver(e=>{e.forEach(el=>{if(el.isIntersecting){el.target.classList.add('visible');obs.unobserve(el.target)}})},{threshold:.12,rootMargin:'0px 0px -60px 0px'});
+document.querySelectorAll('.reveal,.reveal-scale').forEach(el=>obs.observe(el));
+window.addEventListener('scroll',()=>{document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>80)});
 </script>
 </body>
 </html>
