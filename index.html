@@ -338,6 +338,49 @@ footer{padding:48px 24px;border-top:1px solid rgba(255,255,255,.04)}
 </div>
 </footer>
 
+<style>
+.fab{position:fixed;bottom:24px;right:24px;z-index:9998;display:flex;flex-direction:column;gap:10px;align-items:flex-end}
+.fab-btn{width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .3s;border:none;color:#fff;font-size:24px;box-shadow:0 4px 20px rgba(0,0,0,.3)}
+.fab-btn:hover{transform:scale(1.1)}
+.fab-call{background:#c2823c}
+.fab-chat{background:#25d366}
+.fab-sms{background:#3b82f6}
+.chat-popup{position:fixed;bottom:90px;right:24px;width:320px;border-radius:20px;z-index:9998;display:none;flex-direction:column;overflow:hidden;box-shadow:0 12px 48px rgba(0,0,0,.4)}
+.chat-popup.open{display:flex}
+.chat-header{padding:16px 20px;background:rgba(194,130,60,.95);color:#fff;font-weight:700;font-size:14px;display:flex;justify-content:space-between;align-items:center}
+.chat-header button{background:none;border:none;color:#fff;font-size:18px;cursor:pointer}
+.chat-body{padding:20px;background:#0a0f1a;min-height:200px;display:flex;flex-direction:column;gap:12px}
+.chat-msg{padding:10px 14px;border-radius:14px;font-size:13px;line-height:1.5;max-width:85%}
+.chat-bot{background:rgba(255,255,255,.08);color:#e0e0e0;align-self:flex-start}
+.chat-input{display:flex;gap:8px;padding:12px 16px;background:#111827;border-top:1px solid rgba(255,255,255,.06)}
+.chat-input input{flex:1;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:50px;padding:10px 16px;color:#fff;font-size:13px;outline:none}
+.chat-input button{background:#c2823c;color:#fff;border:none;border-radius:50px;padding:10px 16px;font-weight:600;font-size:13px;cursor:pointer}
+</style>
+
+<div class="fab">
+  <a href="tel:(770)427-6389" class="fab-btn fab-call" title="Call us">&#9742;</a>
+  <button class="fab-btn fab-chat" title="Chat with us" onclick="document.getElementById('chatPopup').classList.toggle('open')">&#9993;</button>
+</div>
+
+<div id="chatPopup" class="chat-popup">
+  <div class="chat-header">
+    <span>Dickinson Plumbing</span>
+    <button onclick="this.closest('.chat-popup').classList.remove('open')">&times;</button>
+  </div>
+  <div class="chat-body">
+    <div class="chat-msg chat-bot">Hi! Thanks for visiting. How can we help you today? We offer free estimates on all plumbing work.</div>
+    <div class="chat-msg chat-bot">You can ask about our services, pricing, or schedule a visit. Or just call us at <strong>(770) 427-6389</strong> — we pick up 24/7.</div>
+  </div>
+  <div class="chat-input">
+    <input type="text" placeholder="Type a message..." id="chatMsg">
+    <button onclick="handleChat()">Send</button>
+  </div>
+</div>
+
+<script>
+function handleChat(){const i=document.getElementById('chatMsg');const m=i.value.trim();if(!m)return;const b=document.querySelector('.chat-body');b.innerHTML+='<div class=\'chat-msg\' style=\'background:rgba(194,130,60,.15);color:#e0e0e0;align-self:flex-end\'>'+m+'</div>';i.value='';setTimeout(()=>{b.innerHTML+='<div class=\'chat-msg chat-bot\'>Thanks for your message! For the fastest response, give us a call at <strong>(770) 427-6389</strong>. We typically respond within 15 minutes during business hours.</div>';b.scrollTop=b.scrollHeight},800)}
+</script>
+
 <script>
 const obs=new IntersectionObserver(e=>{e.forEach(el=>{if(el.isIntersecting){el.target.classList.add('visible');obs.unobserve(el.target)}})},{threshold:.12,rootMargin:'0px 0px -60px 0px'});
 document.querySelectorAll('.reveal,.reveal-scale').forEach(el=>obs.observe(el));
